@@ -1,0 +1,4 @@
+# The website is authored in the root HTML, CSS, and JavaScript files.
+# This directory is platform-generated preview/build infrastructure.
+src/** linguist-generated=true
+vite.config.ts linguist-generated=true
