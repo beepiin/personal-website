@@ -14,6 +14,6 @@ async function getServerEntry(): Promise<ServerEntry> {
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
     const handler = await getServerEntry();
-    return handler.fetch(request, env, ctx);
+    return (handler.fetch as (...args: unknown[]) => unknown)(request, env, ctx);
   },
 };
