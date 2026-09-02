@@ -97,8 +97,16 @@ if (cvBtn) {
       })
       .then(function (blob) {
         const url = URL.createObjectURL(new Blob([blob], { type: "application/pdf" }));
-        if (win) win.location.href = url;
-        else window.open(url, "_blank");
+        if (win) {
+          win.document.title = "Bipin Sharma — CV";
+          win.document.body.style.margin = "0";
+          const frame = win.document.createElement("iframe");
+          frame.src = url;
+          frame.style.cssText = "border:0;width:100%;height:100vh;display:block;";
+          win.document.body.appendChild(frame);
+        } else {
+          window.open(url, "_blank");
+        }
       })
       .catch(function () {
         if (win) win.location.href = cvBtn.href;
