@@ -82,3 +82,27 @@ if (form) {
     if (status) status.hidden = false;
   });
 }
+
+// Download CV — fetch the PDF and open it inline in a new tab
+// (the file host forces download via Content-Disposition, so we load it as a blob instead)
+const cvBtn = document.querySelector("a.btn-cv");
+if (cvBtn) {
+  cvBtn.addEventListener("click", function (e) {
+    e.preventDefault();
+    const win = window.open("", "_blank");
+    fetch(cvBtn.href)
+      .then(function (r) {
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        return r.blob();
+      })
+      .then(function (blob) {
+        const url = URL.createObjectURL(new Blob([blob], { type: "application/pdf" }));
+        if (win) win.location.href = url;
+        else window.open(url, "_blank");
+      })
+      .catch(function () {
+        if (win) win.location.href = cvBtn.href;
+        else window.open(cvBtn.href, "_blank");
+      });
+  });
+}
