@@ -65,6 +65,47 @@ if (blogGrid) {
   document.body.appendChild(s);
 }
 
+// Single blog post — rendered inside this site (post.html?id=<postId>)
+const postContent = document.getElementById("postContent");
+if (postContent) {
+  window.renderPost = function (data) {
+    const entry = data.feed && data.feed.entry && data.feed.entry[0];
+    if (!entry) {
+      postContent.innerHTML =
+        '<p class="post-date">Not found</p><h1>Post not found</h1><p>This post could not be loaded. <a href="blogs.html">Back to all blogs</a>.</p>';
+      return;
+    }
+    const title = entry.title.$t;
+    const date = new Date(entry.published.$t).toLocaleDateString("en-US", {
+      year: "numeric", month: "long", day: "numeric",
+    });
+    const original = entry.link.find(function (l) { return l.rel === "alternate"; }).href;
+    document.title = title + " — Bipin Sharma, Chartered Accountant";
+    postContent.innerHTML =
+      '<p class="post-date">' + date + "</p>" +
+      "<h1>" + title + "</h1>" +
+      '<div class="post-body">' + (entry.content ? entry.content.$t : "") + "</div>" +
+      '<p class="post-original"><a href="' + original + '" target="_blank" rel="noopener">View original on blogs.bipin-sharma.com.np &rarr;</a></p>';
+  };
+
+  const postId = new URLSearchParams(window.location.search).get("id");
+  if (postId && /^[0-9]+$/.test(postId)) {
+    const sp = document.createElement("script");
+    sp.src =
+      "https://blogs.bipin-sharma.com.np/feeds/posts/default/" +
+      encodeURIComponent(postId) +
+      "?alt=json-in-script&callback=renderPost";
+    sp.onerror = function () {
+      postContent.innerHTML =
+        '<p class="post-date">Unavailable</p><h1>Could not load post</h1><p>Please try again later or <a href="blogs.html">browse all blogs</a>.</p>';
+    };
+    document.body.appendChild(sp);
+  } else {
+    postContent.innerHTML =
+      '<p class="post-date">Not found</p><h1>Post not found</h1><p><a href="blogs.html">Back to all blogs</a>.</p>';
+  }
+}
+
 // Contact form — opens the visitor's email app with a prefilled message
 const form = document.getElementById("contactForm");
 if (form) {
