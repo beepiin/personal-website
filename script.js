@@ -35,7 +35,8 @@ if (blogGrid) {
     blogGrid.innerHTML = entries
       .map(function (entry) {
         const title = entry.title.$t;
-        const link = entry.link.find(function (l) { return l.rel === "alternate"; }).href;
+        const postId = entry.id.$t.split("post-").pop();
+        const link = "post.html?id=" + encodeURIComponent(postId);
         const date = new Date(entry.published.$t).toLocaleDateString("en-US", {
           year: "numeric", month: "long", day: "numeric",
         });
@@ -47,7 +48,7 @@ if (blogGrid) {
           '<p class="post-date">' + date + "</p>" +
           "<h3>" + title + "</h3>" +
           "<p>" + excerpt + (excerpt.length >= 180 ? "…" : "") + "</p>" +
-          '<p><a href="' + link + '" target="_blank" rel="noopener">Read more &rarr;</a></p>' +
+          '<p><a href="' + link + '">Read more &rarr;</a></p>' +
           "</article>"
         );
       })
