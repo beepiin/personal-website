@@ -69,7 +69,7 @@ if (blogGrid) {
 const postContent = document.getElementById("postContent");
 if (postContent) {
   window.renderPost = function (data) {
-    const entry = data.feed && data.feed.entry && data.feed.entry[0];
+    const entry = data.entry || (data.feed && data.feed.entry && data.feed.entry[0]);
     if (!entry) {
       postContent.innerHTML =
         '<p class="post-date">Not found</p><h1>Post not found</h1><p>This post could not be loaded. <a href="blogs.html">Back to all blogs</a>.</p>';
