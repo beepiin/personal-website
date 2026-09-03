@@ -184,6 +184,18 @@ a { color: inherit; text-decoration: none; }
 .prose p { margin-top: 12px; color: var(--muted); }
 .post-date { font-size: 12px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
 
+/* Single blog post page */
+.post-wrap { max-width: 760px; }
+.post-full h1 { margin-top: 12px; font-size: clamp(28px, 4vw, 40px); font-weight: 800; line-height: 1.2; }
+.post-body { margin-top: 32px; font-size: 16px; line-height: 1.8; color: var(--ink); }
+.post-body p { margin: 0 0 16px; }
+.post-body img { max-width: 100%; height: auto; border-radius: 12px; margin: 16px 0; }
+.post-body h2, .post-body h3, .post-body h4 { margin: 32px 0 12px; font-weight: 700; }
+.post-body ul, .post-body ol { margin: 0 0 16px 24px; }
+.post-body a { color: var(--primary); }
+.post-body blockquote { margin: 16px 0; padding: 12px 20px; border-left: 4px solid var(--primary); background: rgba(0, 0, 0, 0.04); border-radius: 0 8px 8px 0; }
+.post-original { margin-top: 40px; padding-top: 24px; border-top: 1px solid rgba(0, 0, 0, 0.08); font-size: 14px; }
+
 /* ---------- Footer ---------- */
 .site-footer { background: var(--ink); color: var(--ink-fg); }
 .footer-grid { display: grid; gap: 40px; padding: 64px 0; }
