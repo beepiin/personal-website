@@ -1,0 +1,56 @@
+{
+  "site": {
+    "footerAbout": "Chartered Accountant offering audit, assurance, taxation, NFRS implementation and advisory services across Nepal.",
+    "address": "Gaindakot-5, Nawalparasi (East), Nepal",
+    "phone1": "+977 9825417535",
+    "phone2": "+977 9845814621",
+    "whatsapp": "9779845814621",
+    "email": "mail@bipin-sharma.com.np",
+    "hours": "Sun - Fri 10:00 AM to 5:00 PM",
+    "designer": "@beepiinofficial"
+  },
+  "home": {
+    "eyebrow": "Chartered Accountant",
+    "name": "Bipin Sharma",
+    "intro": "A qualified Chartered Accountant with comprehensive experience gained during articleship at A.S.U.S Associates and ECOVIS PYC & Associates, Chartered Accountants. Possess in-depth exposure to external, internal, and tax audits across industries including banking, insurance, hydropower, healthcare, and education. Proven expertise in financial reporting, NFRS compliance, taxation, and internal control assessment.",
+    "cvUrl": "/__l5e/assets-v1/0babdce4-8a03-471b-b3fe-652994995b93/Bipin_Sharma_CV.pdf",
+    "cvLabel": "Download CV",
+    "aboutTitle": "Bipin Sharma",
+    "aboutTagline": "A Passionate Individual Based in Kathmandu, Nepal",
+    "aboutBody": "I am Bipin Sharma, a dedicated Chartered Accountant with hands-on experience in auditing, tax filing, and consultancy at leading firms. Skilled in financial analysis and accounting software, I have worked across various sectors including banking, insurance, and hospitality. I am committed to accuracy, continuous learning, and delivering high-quality results.",
+    "counter": "10+",
+    "counterLabel": "Client Handled",
+    "freelanceKicker": "I Am Available For",
+    "freelanceTitle": "Freelance Work",
+    "freelanceText": "I am Bipin Sharma, a Chartered Accountant and audit professional with practical experience. I am also available to work as a freelancer, offering services in auditing, accounting, tax filing, and financial consultancy.",
+    "servicesTitle": "Knowledge & Skills Related to External Audit, Internal Audit, Tax Audit, Tax Return Filings etc",
+    "services": [
+      {
+        "icon": "🛡️",
+        "title": "Audit & Assurance",
+        "text": "I have performed audits of organizations like banking sectors, hydropower companies, hospitals, NGOs & INGOs, educational institutions, digital wallet companies, broker companies and many more private companies."
+      },
+      {
+        "icon": "🗝️",
+        "title": "Consultancy & Advisory Services",
+        "text": "I provide accounting support, bookkeeping, payroll management, and tax return filing services. I assist with financial reporting, regulatory compliance, and audit preparation to help businesses maintain accurate records."
+      },
+      {
+        "icon": "📊",
+        "title": "NFRS Implementation",
+        "text": "Comprehensive NFRS implementation and professional bookkeeping services, including assessment of existing accounting systems, gap analysis, design of compliant accounting policies, and transition support."
+      }
+    ]
+  },
+  "blogsPage": {
+    "title": "Blogs",
+    "subtitle": "Notes on auditing, taxation, NFRS and financial reporting practice.",
+    "showBlogger": true
+  },
+  "contactPage": {
+    "title": "Contact Us",
+    "subtitle": "Reach out for audit, assurance, taxation, NFRS implementation or advisory support.",
+    "formTitle": "Send a message"
+  },
+  "posts": []
+}
