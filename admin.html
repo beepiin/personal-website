@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Site Manager — Bipin Sharma</title>
+  <meta name="description" content="Private site manager for editing website content and blog posts." />
+  <link rel="icon" href="/favicon.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body class="admin-body">
+
+  <!-- Login -->
+  <div class="admin-login" id="loginView">
+    <form class="login-card" id="loginForm">
+      <img src="assets/logo.png" alt="Bipin Sharma" class="login-logo" />
+      <h1>Site Manager</h1>
+      <p class="muted">Sign in to edit your website.</p>
+      <label>Username <input type="text" name="username" autocomplete="username" required /></label>
+      <label>Password <input type="password" name="password" autocomplete="current-password" required /></label>
+      <p class="err" id="loginError" hidden>Wrong username or password.</p>
+      <button class="btn btn-solid" type="submit">Sign in</button>
+    </form>
+  </div>
+
+  <!-- App -->
+  <div class="admin-app" id="appView" hidden>
+    <header class="admin-top">
+      <img src="assets/logo.png" alt="Bipin Sharma" class="admin-logo" />
+      <div class="grow"></div>
+      <span class="save-state" id="saveState"></span>
+      <a class="btn btn-ghost" href="index.html" target="_blank" rel="noopener">View site</a>
+      <button class="btn btn-solid" id="publishBtn" type="button">Publish to GitHub</button>
+      <button class="btn btn-ghost" id="logoutBtn" type="button">Log out</button>
+    </header>
+
+    <nav class="admin-tabs" id="tabs">
+      <button class="tab active" data-tab="home" type="button">Home</button>
+      <button class="tab" data-tab="services" type="button">Services</button>
+      <button class="tab" data-tab="contact" type="button">Contact details</button>
+      <button class="tab" data-tab="pages" type="button">Page text</button>
+      <button class="tab" data-tab="blogs" type="button">Blogs</button>
+      <button class="tab" data-tab="settings" type="button">Settings</button>
+    </nav>
+
+    <main class="admin-main">
+      <!-- Home -->
+      <section class="panel active" data-panel="home">
+        <h2>Home page</h2>
+        <div class="grid2">
+          <label>Small text above name <input data-f="home.eyebrow" /></label>
+          <label>Name <input data-f="home.name" /></label>
+        </div>
+        <label>Introduction <textarea rows="6" data-f="home.intro"></textarea></label>
+        <div class="grid2">
+          <label>CV file link <input data-f="home.cvUrl" /></label>
+          <label>CV button label <input data-f="home.cvLabel" /></label>
+        </div>
+        <h3>About section</h3>
+        <div class="grid2">
+          <label>Title <input data-f="home.aboutTitle" /></label>
+          <label>Tagline <input data-f="home.aboutTagline" /></label>
+        </div>
+        <label>About text <textarea rows="5" data-f="home.aboutBody"></textarea></label>
+        <div class="grid2">
+          <label>Counter number <input data-f="home.counter" /></label>
+          <label>Counter label <input data-f="home.counterLabel" /></label>
+        </div>
+        <h3>Freelance block</h3>
+        <div class="grid2">
+          <label>Kicker <input data-f="home.freelanceKicker" /></label>
+          <label>Title <input data-f="home.freelanceTitle" /></label>
+        </div>
+        <label>Text <textarea rows="4" data-f="home.freelanceText"></textarea></label>
+      </section>
+
+      <!-- Services -->
+      <section class="panel" data-panel="services">
+        <h2>Services</h2>
+        <label>Section heading <textarea rows="3" data-f="home.servicesTitle"></textarea></label>
+        <div id="servicesEditor"></div>
+        <button class="btn btn-ghost" id="addService" type="button">+ Add service</button>
+      </section>
+
+      <!-- Contact -->
+      <section class="panel" data-panel="contact">
+        <h2>Contact details</h2>
+        <label>Footer about text <textarea rows="4" data-f="site.footerAbout"></textarea></label>
+        <label>Address <input data-f="site.address" /></label>
+        <div class="grid2">
+          <label>Phone 1 <input data-f="site.phone1" /></label>
+          <label>Phone 2 <input data-f="site.phone2" /></label>
+        </div>
+        <div class="grid2">
+          <label>WhatsApp number (digits only, with country code) <input data-f="site.whatsapp" /></label>
+          <label>Email <input data-f="site.email" /></label>
+        </div>
+        <div class="grid2">
+          <label>Office hours <input data-f="site.hours" /></label>
+          <label>Designer credit <input data-f="site.designer" /></label>
+        </div>
+      </section>
+
+      <!-- Pages -->
+      <section class="panel" data-panel="pages">
+        <h2>Page text</h2>
+        <h3>Blogs page</h3>
+        <div class="grid2">
+          <label>Title <input data-f="blogsPage.title" /></label>
+          <label>Subtitle <input data-f="blogsPage.subtitle" /></label>
+        </div>
+        <label class="check"><input type="checkbox" data-f="blogsPage.showBlogger" data-type="bool" /> Also show posts from blogs.bipin-sharma.com.np</label>
+        <h3>Contact page</h3>
+        <div class="grid2">
+          <label>Title <input data-f="contactPage.title" /></label>
+          <label>Form heading <input data-f="contactPage.formTitle" /></label>
+        </div>
+        <label>Subtitle <input data-f="contactPage.subtitle" /></label>
+      </section>
+
+      <!-- Blogs -->
+      <section class="panel" data-panel="blogs">
+        <h2>Blog posts</h2>
+        <p class="muted">Posts you write here appear on the Blogs page first, before posts pulled from your Blogger site.</p>
+        <button class="btn btn-solid" id="addPost" type="button">+ New post</button>
+        <div id="postsEditor"></div>
+      </section>
+
+      <!-- Settings -->
+      <section class="panel" data-panel="settings">
+        <h2>Publishing settings</h2>
+        <p class="muted">Your site lives on GitHub. Enter the repository details and a personal access token so this manager can save your changes there. These stay in this browser only.</p>
+        <div class="grid2">
+          <label>GitHub owner / username <input id="ghOwner" /></label>
+          <label>Repository name <input id="ghRepo" /></label>
+        </div>
+        <div class="grid2">
+          <label>Branch <input id="ghBranch" placeholder="main" /></label>
+          <label>Personal access token <input id="ghToken" type="password" autocomplete="off" /></label>
+        </div>
+        <label>Path to content file <input id="ghPath" placeholder="content.json" /></label>
+        <div class="row">
+          <button class="btn btn-solid" id="saveSettings" type="button">Save settings</button>
+          <button class="btn btn-ghost" id="testSettings" type="button">Test connection</button>
+          <span class="save-state" id="settingsState"></span>
+        </div>
+        <h3>Backup</h3>
+        <div class="row">
+          <button class="btn btn-ghost" id="downloadJson" type="button">Download content file</button>
+          <label class="btn btn-ghost file-btn">Upload content file<input type="file" id="uploadJson" accept="application/json" hidden /></label>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>
