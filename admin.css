@@ -97,3 +97,5 @@
   .admin-tabs { top: 0; position: static; }
   .admin-top { position: static; }
 }
+
+[hidden] { display: none !important; }
