@@ -67,6 +67,42 @@ function applyContent(c) {
   const cv = document.querySelector("a.btn-cv");
   if (cv && c.home && c.home.cvUrl) cv.href = c.home.cvUrl;
 
+  // Hero photo slider
+  const heroSlides = document.getElementById("heroSlides");
+  if (heroSlides) {
+    const imgs =
+      c.home && Array.isArray(c.home.heroImages) && c.home.heroImages.length
+        ? c.home.heroImages
+        : ["assets/hero.png"];
+    heroSlides.innerHTML = imgs
+      .map(function (src, i) {
+        return (
+          '<img class="slide' + (i === 0 ? " is-active" : "") + '" src="' + esc(src) +
+          '" alt="' + esc((c.home && c.home.name) || "Bipin Sharma") + '" />'
+        );
+      })
+      .join("");
+  }
+
+  // Freelance WhatsApp button
+  const freelanceWa = document.getElementById("freelanceWa");
+  if (freelanceWa) {
+    if (site.whatsapp) freelanceWa.href = "https://wa.me/" + site.whatsapp;
+    else freelanceWa.hidden = true;
+  }
+
+  // About "Read More" popup content
+  const aboutModalBody = document.getElementById("aboutModalBody");
+  if (aboutModalBody && c.home) {
+    const text = c.home.aboutFull || c.home.aboutBody || "";
+    aboutModalBody.innerHTML = String(text)
+      .split(/\n\s*\n/)
+      .map(function (p) {
+        return "<p>" + esc(p.trim()) + "</p>";
+      })
+      .join("");
+  }
+
   // Services grid
   const services = document.getElementById("servicesGrid");
   if (services && c.home && Array.isArray(c.home.services)) {
@@ -307,34 +343,87 @@ if (form) {
   });
 }
 
-// Download CV — fetch the PDF and open it inline in a new tab
-// (the file host forces download via Content-Disposition, so we load it as a blob instead)
-const cvBtn = document.querySelector("a.btn-cv");
-if (cvBtn) {
-  cvBtn.addEventListener("click", function (e) {
-    e.preventDefault();
-    const win = window.open("", "_blank");
-    fetch(cvBtn.href)
-      .then(function (r) {
-        if (!r.ok) throw new Error("HTTP " + r.status);
-        return r.blob();
+
+// --- hero slider behaviour -------------------------------------------------
+function initSlider() {
+  const slider = document.getElementById("heroSlider");
+  const wrap = document.getElementById("heroSlides");
+  const dots = document.getElementById("heroDots");
+  if (!slider || !wrap) return;
+
+  const slides = Array.prototype.slice.call(wrap.querySelectorAll(".slide"));
+  if (slides.length < 2) {
+    if (dots) dots.innerHTML = "";
+    return;
+  }
+  slider.classList.add("has-many");
+
+  let index = 0;
+  let timer = null;
+
+  if (dots) {
+    dots.innerHTML = slides
+      .map(function (_, i) {
+        return '<button type="button" aria-label="Photo ' + (i + 1) + '"></button>';
       })
-      .then(function (blob) {
-        const url = URL.createObjectURL(new Blob([blob], { type: "application/pdf" }));
-        if (win) {
-          win.document.title = "Bipin Sharma — CV";
-          win.document.body.style.margin = "0";
-          const frame = win.document.createElement("iframe");
-          frame.src = url;
-          frame.style.cssText = "border:0;width:100%;height:100vh;display:block;";
-          win.document.body.appendChild(frame);
-        } else {
-          window.open(url, "_blank");
-        }
-      })
-      .catch(function () {
-        if (win) win.location.href = cvBtn.href;
-        else window.open(cvBtn.href, "_blank");
-      });
+      .join("");
+  }
+  const dotEls = dots ? Array.prototype.slice.call(dots.children) : [];
+
+  function show(i) {
+    index = (i + slides.length) % slides.length;
+    slides.forEach(function (el, n) {
+      el.classList.toggle("is-active", n === index);
+    });
+    dotEls.forEach(function (el, n) {
+      el.classList.toggle("is-active", n === index);
+    });
+  }
+  function next(step) {
+    show(index + step);
+    restart();
+  }
+  function restart() {
+    if (timer) clearInterval(timer);
+    timer = setInterval(function () { show(index + 1); }, 5000);
+  }
+
+  dotEls.forEach(function (el, i) {
+    el.addEventListener("click", function () { show(i); restart(); });
+  });
+  const prev = document.getElementById("heroPrev");
+  const nxt = document.getElementById("heroNext");
+  if (prev) prev.addEventListener("click", function () { next(-1); });
+  if (nxt) nxt.addEventListener("click", function () { next(1); });
+
+  // swipe on touch devices
+  let startX = null;
+  slider.addEventListener("touchstart", function (e) { startX = e.touches[0].clientX; }, { passive: true });
+  slider.addEventListener("touchend", function (e) {
+    if (startX === null) return;
+    const dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) > 40) next(dx < 0 ? 1 : -1);
+    startX = null;
+  });
+
+  show(0);
+  restart();
+}
+
+// --- about "Read More" popup ----------------------------------------------
+function initAboutModal() {
+  const btn = document.getElementById("aboutMore");
+  const modal = document.getElementById("aboutModal");
+  if (!btn || !modal) return;
+
+  function open() { modal.hidden = false; document.body.style.overflow = "hidden"; }
+  function close() { modal.hidden = true; document.body.style.overflow = ""; }
+
+  btn.addEventListener("click", open);
+  modal.querySelectorAll("[data-close]").forEach(function (el) {
+    el.addEventListener("click", close);
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && !modal.hidden) close();
   });
 }
