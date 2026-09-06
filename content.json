@@ -13,7 +13,7 @@
     "eyebrow": "Chartered Accountant",
     "name": "Bipin Sharma",
     "intro": "A qualified Chartered Accountant with comprehensive experience gained during articleship at A.S.U.S Associates and ECOVIS PYC & Associates, Chartered Accountants. Possess in-depth exposure to external, internal, and tax audits across industries including banking, insurance, hydropower, healthcare, and education. Proven expertise in financial reporting, NFRS compliance, taxation, and internal control assessment.",
-    "cvUrl": "/__l5e/assets-v1/0babdce4-8a03-471b-b3fe-652994995b93/Bipin_Sharma_CV.pdf",
+    "cvUrl": "assets/Bipin_Sharma_CV.pdf",
     "cvLabel": "Download CV",
     "aboutTitle": "Bipin Sharma",
     "aboutTagline": "A Passionate Individual Based in Kathmandu, Nepal",
@@ -40,7 +40,12 @@
         "title": "NFRS Implementation",
         "text": "Comprehensive NFRS implementation and professional bookkeeping services, including assessment of existing accounting systems, gap analysis, design of compliant accounting policies, and transition support."
       }
-    ]
+    ],
+    "heroImages": [
+      "assets/hero.png",
+      "assets/about.png"
+    ],
+    "aboutFull": "I am Bipin Sharma, a dedicated Chartered Accountant with hands-on experience in auditing, tax filing, and consultancy at leading firms. Skilled in financial analysis and accounting software, I have worked across various sectors including banking, insurance, and hospitality. I am committed to accuracy, continuous learning, and delivering high-quality results.\n\nDuring my articleship at A.S.U.S Associates and ECOVIS PYC & Associates, Chartered Accountants, I carried out external, internal and tax audits for banks, insurance companies, hydropower projects, hospitals, NGOs and INGOs, educational institutions and hospitality businesses.\n\nMy work covers financial reporting under NFRS, income tax and VAT compliance, internal control assessment, bookkeeping, payroll and management reporting. I also support businesses preparing for their statutory audit and putting stronger day-to-day financial processes in place."
   },
   "blogsPage": {
     "title": "Blogs",
