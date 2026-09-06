@@ -248,7 +248,7 @@ function initPost(content) {
   const postContent = document.getElementById("postContent");
   if (!postContent) return;
 
-  const params = new URLSearchParams(window.location.search);
+  const params = new URLSearchParams(window.ROUTE_QUERY || window.location.search);
   const slug = params.get("slug");
   const postId = params.get("id");
 
