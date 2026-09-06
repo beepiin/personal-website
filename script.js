@@ -307,30 +307,10 @@ function initPost(content) {
   }
 }
 
-// --- boot ------------------------------------------------------------------
-fetch("content.json", { cache: "no-store" })
-  .then(function (r) {
-    if (!r.ok) throw new Error("HTTP " + r.status);
-    return r.json();
-  })
-  .then(function (content) {
-    window.SITE_CONTENT = content;
-    applyContent(content);
-    initSlider();
-    initAboutModal();
-    initBlogs(content);
-    initPost(content);
-  })
-  .catch(function () {
-    initSlider();
-    initAboutModal();
-    initBlogs(null);
-    initPost(null);
-  });
-
-// Contact form — opens the visitor's email app with a prefilled message
-const form = document.getElementById("contactForm");
-if (form) {
+// --- contact form ----------------------------------------------------------
+function initForm() {
+  const form = document.getElementById("contactForm");
+  if (!form) return;
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     const name = form.elements["name"].value.trim();
@@ -348,6 +328,87 @@ if (form) {
     if (status) status.hidden = false;
   });
 }
+
+// --- page setup (runs on first load and after every in-page navigation) -----
+function setupPage() {
+  initChrome();
+  initForm();
+  const content = window.SITE_CONTENT;
+  if (content) applyContent(content);
+  initSlider();
+  initAboutModal();
+  initBlogs(content || null);
+  initPost(content || null);
+}
+
+// --- in-page navigation: every link loads in place, address never changes ---
+const PAGE_CACHE = {};
+
+function loadPage(file, query) {
+  const fetchIt = PAGE_CACHE[file]
+    ? Promise.resolve(PAGE_CACHE[file])
+    : fetch(file, { cache: "no-store" })
+        .then(function (r) {
+          if (!r.ok) throw new Error("HTTP " + r.status);
+          return r.text();
+        })
+        .then(function (html) {
+          PAGE_CACHE[file] = html;
+          return html;
+        });
+
+  return fetchIt
+    .then(function (html) {
+      const doc = new DOMParser().parseFromString(html, "text/html");
+      window.ROUTE_QUERY = query || "";
+      window.ROUTE_PAGE = file;
+      document.title = doc.title || document.title;
+      document.body.innerHTML = doc.body.innerHTML;
+      window.scrollTo(0, 0);
+      setupPage();
+    })
+    .catch(function () {
+      // if anything fails, fall back to a normal page load
+      window.location.href = file + (query || "");
+    });
+}
+
+document.addEventListener("click", function (e) {
+  if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+  const a = e.target.closest ? e.target.closest("a") : null;
+  if (!a) return;
+  if (a.target && a.target !== "_self") return;
+  if (a.hasAttribute("download")) return;
+
+  const raw = a.getAttribute("href") || "";
+  if (!raw || raw.charAt(0) === "#" || /^[a-z]+:/i.test(raw)) return;
+
+  const url = new URL(a.href, window.location.href);
+  if (url.origin !== window.location.origin) return;
+
+  const file = url.pathname.split("/").pop();
+  if (!/\.html$/i.test(file)) return;
+  if (file === "admin.html") return;
+
+  e.preventDefault();
+  loadPage(file, url.search);
+});
+
+// --- boot ------------------------------------------------------------------
+window.ROUTE_QUERY = window.location.search;
+fetch("content.json", { cache: "no-store" })
+  .then(function (r) {
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    return r.json();
+  })
+  .then(function (content) {
+    window.SITE_CONTENT = content;
+  })
+  .catch(function () {})
+  .then(function () {
+    setupPage();
+  });
+
 
 
 // --- hero slider behaviour -------------------------------------------------
