@@ -314,10 +314,14 @@ fetch("content.json", { cache: "no-store" })
   .then(function (content) {
     window.SITE_CONTENT = content;
     applyContent(content);
+    initSlider();
+    initAboutModal();
     initBlogs(content);
     initPost(content);
   })
   .catch(function () {
+    initSlider();
+    initAboutModal();
     initBlogs(null);
     initPost(null);
   });
