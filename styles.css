@@ -224,3 +224,46 @@ a { color: inherit; text-decoration: none; }
   .nav { display: none; }
   .menu-btn { display: block; }
 }
+
+/* ---------- Hero slider ---------- */
+.slider { position: relative; }
+.slides { position: relative; }
+.slide { display: none; width: 100%; }
+.slide.is-active { display: block; animation: fadeIn 0.5s ease; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.slider-nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  height: 40px; width: 40px; border-radius: 999px; border: 0; cursor: pointer;
+  background: rgba(255, 255, 255, 0.85); color: var(--ink);
+  font-size: 22px; line-height: 1; display: none;
+}
+.slider-nav:hover { background: #fff; }
+.slider-nav.prev { left: 6px; }
+.slider-nav.next { right: 6px; }
+.slider.has-many .slider-nav { display: block; }
+.slider-dots { display: flex; gap: 8px; justify-content: center; margin-top: 14px; }
+.slider-dots button {
+  height: 9px; width: 9px; padding: 0; border: 0; border-radius: 999px; cursor: pointer;
+  background: rgba(0, 0, 0, 0.25);
+}
+.slider-dots button.is-active { background: var(--primary); width: 22px; }
+
+/* ---------- Freelance actions ---------- */
+.freelance-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.btn-wa { background: #25d366; color: #06371a; }
+
+/* ---------- Modal ---------- */
+.modal { position: fixed; inset: 0; z-index: 60; display: flex; align-items: center; justify-content: center; padding: 20px; }
+.modal[hidden] { display: none; }
+.modal-backdrop { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.55); }
+.modal-box {
+  position: relative; background: #fff; border-radius: 24px; padding: 32px;
+  max-width: 720px; width: 100%; max-height: 85vh; overflow-y: auto;
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.4);
+}
+.modal-box h2 { font-size: 28px; font-weight: 800; }
+.modal-close {
+  position: absolute; top: 14px; right: 16px; border: 0; background: transparent;
+  font-size: 28px; line-height: 1; cursor: pointer; color: var(--muted);
+}
+.modal-body p { margin-top: 14px; color: var(--muted); line-height: 1.75; }

@@ -45,14 +45,21 @@
         <p class="eyebrow" data-c="home.eyebrow">Chartered Accountant</p>
         <h1 data-c="home.name">Bipin Sharma</h1>
         <p data-c="home.intro">A qualified Chartered Accountant with comprehensive experience gained during articleship at A.S.U.S Associates and ECOVIS PYC &amp; Associates, Chartered Accountants. Possess in-depth exposure to external, internal, and tax audits across industries including banking, insurance, hydropower, healthcare, and education. Proven expertise in financial reporting, NFRS compliance, taxation, and internal control assessment.</p>
-        <a href="/__l5e/assets-v1/0babdce4-8a03-471b-b3fe-652994995b93/Bipin_Sharma_CV.pdf" class="btn btn-cv" target="_blank" rel="noopener">
+        <a href="assets/Bipin_Sharma_CV.pdf" class="btn btn-cv" download="Bipin_Sharma_CV.pdf" target="_blank" rel="noopener">
           <span data-c="home.cvLabel">Download CV</span>
           <span class="circle">&#9659;</span>
         </a>
       </div>
       <div class="hero-img-wrap">
         <div class="hero-frame">
-          <img src="assets/hero.png" alt="Bipin Sharma, Chartered Accountant" />
+          <div class="slider" id="heroSlider">
+            <div class="slides" id="heroSlides">
+              <img src="assets/hero.png" alt="Bipin Sharma, Chartered Accountant" class="slide is-active" />
+            </div>
+            <button class="slider-nav prev" id="heroPrev" aria-label="Previous photo">&#8249;</button>
+            <button class="slider-nav next" id="heroNext" aria-label="Next photo">&#8250;</button>
+            <div class="slider-dots" id="heroDots"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -72,7 +79,7 @@
         <p class="tagline" data-c="home.aboutTagline">A Passionate Individual Based in Kathmandu, Nepal</p>
         <p class="body" data-c="home.aboutBody">I am Bipin Sharma, a dedicated Chartered Accountant with hands-on experience in auditing, tax filing, and consultancy at leading firms.</p>
         <div class="about-actions">
-          <a href="contact.html" class="btn">Read More &rarr;</a>
+          <button type="button" class="btn" id="aboutMore">Read More &rarr;</button>
           <div>
             <p class="counter" data-c="home.counter">10+</p>
             <p class="counter-label" data-c="home.counterLabel">Client Handled</p>
@@ -88,7 +95,10 @@
       <p class="kicker" data-c="home.freelanceKicker">I Am Available For</p>
       <h2 data-c="home.freelanceTitle">Freelance Work</h2>
       <p data-c="home.freelanceText">I am Bipin Sharma, a Chartered Accountant and audit professional with practical experience.</p>
-      <a href="contact.html" class="btn">Contact Us &rarr;</a>
+      <div class="freelance-actions">
+        <a href="contact.html" class="btn">Contact Us &rarr;</a>
+        <a href="https://wa.me/9779845814621" class="btn btn-wa" id="freelanceWa" target="_blank" rel="noopener">WhatsApp Us</a>
+      </div>
     </div>
   </section>
 
@@ -100,6 +110,17 @@
       <div class="cards" id="servicesGrid"></div>
     </div>
   </section>
+
+  <!-- About modal -->
+  <div class="modal" id="aboutModal" hidden>
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="aboutModalTitle">
+      <button class="modal-close" type="button" data-close aria-label="Close">&times;</button>
+      <h2 id="aboutModalTitle" data-c="home.aboutTitle">Bipin Sharma</h2>
+      <p class="tagline" data-c="home.aboutTagline">A Passionate Individual Based in Kathmandu, Nepal</p>
+      <div class="modal-body" id="aboutModalBody"></div>
+    </div>
+  </div>
 
   <!-- Footer -->
   <footer class="site-footer">
