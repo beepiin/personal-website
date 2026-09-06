@@ -3,29 +3,31 @@
 // Content comes from content.json, which the CRM at admin.html edits.
 // ---------------------------------------------------------------------------
 
-// Mobile menu toggle
-const menuBtn = document.getElementById("menuBtn");
-const mobileNav = document.getElementById("mobileNav");
+// Mobile menu toggle + footer year (re-bound after every in-page navigation)
+function initChrome() {
+  const menuBtn = document.getElementById("menuBtn");
+  const mobileNav = document.getElementById("mobileNav");
 
-if (menuBtn && mobileNav) {
-  menuBtn.addEventListener("click", () => {
-    const isOpen = mobileNav.classList.toggle("open");
-    menuBtn.innerHTML = isOpen ? "&times;" : "&#9776;";
-  });
-
-  mobileNav.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => {
-      mobileNav.classList.remove("open");
-      menuBtn.innerHTML = "&#9776;";
+  if (menuBtn && mobileNav) {
+    menuBtn.addEventListener("click", () => {
+      const isOpen = mobileNav.classList.toggle("open");
+      menuBtn.innerHTML = isOpen ? "&times;" : "&#9776;";
     });
-  });
+
+    mobileNav.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        mobileNav.classList.remove("open");
+        menuBtn.innerHTML = "&#9776;";
+      });
+    });
+  }
+
+  const yearEl = document.getElementById("year");
+  if (yearEl) {
+    yearEl.textContent = new Date().getFullYear();
+  }
 }
 
-// Footer year
-const yearEl = document.getElementById("year");
-if (yearEl) {
-  yearEl.textContent = new Date().getFullYear();
-}
 
 // --- helpers ---------------------------------------------------------------
 function getPath(obj, path) {
